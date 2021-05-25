@@ -29,7 +29,7 @@ function Balance({ balance }) {
     const classes = useStyles();
 
     return (
-        <Paper className={classes.paperContainer} elevation={3}>
+        <Paper className={classes.paperContainer} elevation={6}>
             <Typography className={classes.balanceHeader} variant="h5" gutterBottom>
                 Balance
             </Typography>

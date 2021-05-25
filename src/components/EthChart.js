@@ -10,13 +10,13 @@ import {
 } from '@devexpress/dx-react-chart-material-ui';
 import {
     ValueScale,
-    Stack,
     Animation,
-    EventTracker,
-    HoverState,
 } from '@devexpress/dx-react-chart';
 import { makeStyles } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Typography from '@material-ui/core/Typography';
 
 // style chart
 const useStyles = makeStyles((theme) => ({
@@ -28,15 +28,21 @@ const useStyles = makeStyles((theme) => ({
     chart: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1)
+    },
+    buttonGroup: {
+        marginTop: theme.spacing(1),
+        marginBottom: theme.spacing(3)
+    },
+    activeButton: {
+        color: theme.palette.text.primary,
+    },
+    inactiveButton: {
+        color: theme.palette.text.secondary,
+    },
+    header: {
+        padding: theme.spacing(1)
     }
 }));
-
-// format ticks
-const format = () => (tick) => {
-    const date = new Date(tick * 1000);
-    const dateStrings = date.toLocaleDateString('DE-at').slice(0, -4);
-    return dateStrings;
-};
 
 // styled legend
 const legendStyles = () => ({
@@ -93,21 +99,42 @@ const ethColor = "#FF7043";
 const EthLabel = makeLabel("", ethColor);
 
 // domain from 0 - max element
-const customDomain = (max) => [0, max];
+// const customDomain = (max) => [0, max]; // this works, but domains change for each filter then
+const ethDomain = () => [0, 0.0003];
+const usdDomain = () => [0, 1.2];
 
 // render chart
 const EthChart = ({ data }) => {
     const classes = useStyles();
 
-    const chartData = getChartData(data);
+    const [filter, setFilter] = React.useState('All');
+    const [currentData, setCurrentData] = React.useState(getChartData(data[filter]));
+
+    const handleClick = (buttonFilter) => {
+        setFilter(buttonFilter);
+    };
+
+    React.useEffect(() => {
+        setCurrentData(getChartData(data[filter]));
+    }, [filter, data]);
+
+    // const chartData = getChartData(data);
     return (
-        <Paper className={classes.paperContainer} elevation={3}>
+        <Paper className={classes.paperContainer} elevation={6}>
+            <Typography className={classes.header} variant="h5">
+                ETH/h vs USD/h
+            </Typography>
+            <ButtonGroup className={classes.buttonGroup} variant="text" aria-label="contained primary button group">
+                <Button className={filter === 'Daily' ? classes.activeButton : classes.inactiveButton} onClick={() => handleClick('Daily')}>Daily</Button>
+                <Button className={filter === 'Weekly' ? classes.activeButton : classes.inactiveButton} onClick={() => handleClick('Weekly')}>Weekly</Button>
+                <Button className={filter === 'Monthly' ? classes.activeButton : classes.inactiveButton} onClick={() => handleClick('Monthly')}>Monthly</Button>
+                <Button className={filter === 'All' ? classes.activeButton : classes.inactiveButton} onClick={() => handleClick('All')} >All</Button>
+            </ButtonGroup>
+
             <Chart
-                data={chartData}
+                data={currentData}
                 className={classes.chart}
             >
-                <Title text="ETH vs USD" />
-                <Animation />
                 <Legend
                     position="bottom"
                     rootComponent={Root}
@@ -115,18 +142,17 @@ const EthChart = ({ data }) => {
                     labelComponent={Label}
                 />
 
-                <ValueScale name="usdScale" modifyDomain={() => customDomain(Math.max.apply(Math, chartData.map(x => x.usdPerHour))
-                )} />
-                <ValueAxis scaleName="usdScale" showGrid={false} labelComponent={UsdLabel} />
+                <ValueScale name="usdScale" modifyDomain={usdDomain} />
+                <ValueAxis scaleName="usdScale" showGrid={false} position="right" labelComponent={UsdLabel} />
 
-                <ValueScale name="ethScale" modifyDomain={() => customDomain(Math.max.apply(Math, chartData.map(x => x.coinsPerHour)))} />
-                <ValueAxis scaleName="ethScale" showGrid={false} position="right" labelComponent={EthLabel} />
+                <ValueScale name="ethScale" modifyDomain={ethDomain} />
+                <ValueAxis scaleName="ethScale" showGrid={false} labelComponent={EthLabel} />
 
-                <ArgumentAxis tickFormat={format} />
+                <ArgumentAxis showLabels={false} />
 
                 <LineSeries key="ETH" name="ETH per hour" valueField="coinsPerHour" argumentField="time" scaleName="ethScale" color={ethColor} />
                 <LineSeries key="usd" name="USD per hour" valueField="usdPerHour" argumentField="time" scaleName="usdScale" color={usdColor} />
-
+                {/* <Animation />  Animation is only working on first render, this is a missing feature of this chart lib*/}
             </Chart>
         </Paper>
     );
