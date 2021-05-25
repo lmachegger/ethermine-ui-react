@@ -10,11 +10,8 @@ const useStyles = makeStyles((theme) => ({
         width: "100%"
     },
     contentContainer: {
-        [theme.breakpoints.down('xs')]: {
+        [theme.breakpoints.down('sm')]: {
             width: "100%"
-        },
-        [theme.breakpoints.up('sm')]: {
-            width: "90%"
         },
         [theme.breakpoints.up('md')]: {
             width: "80%"
@@ -33,15 +30,15 @@ const StatContent = ({ data }) => {
     return (
         <Grid container spacing={0} justify="center" alignItems="center">
             <Grid container className={classes.contentContainer} spacing={3} justify="center" alignItems="stretch">
-                <Grid item className={classes.contentItems} xs={11} md={5}>
+                <Grid item className={classes.contentItems} xs={12} md={5}>
                     <Balance balance={data.Balance} />
                 </Grid>
 
-                <Grid item className={classes.contentItems} xs={11} md={6}>
+                <Grid item className={classes.contentItems} xs={12} md={7}>
                     <CurrentData stats={data['Daily'].stats} />
                 </Grid>
 
-                <Grid item className={classes.contentItems} xs={11} >
+                <Grid item className={classes.contentItems} xs={12} >
                     <EthChart data={data} title="coinsPerHour" />
                 </Grid >
             </Grid >
