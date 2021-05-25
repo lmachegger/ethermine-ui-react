@@ -13,7 +13,7 @@ const Footer = () => {
     return (
         <div id="header">
             <Typography className={classes.footer} variant="body1" color="textSecondary" gutterBottom>
-                Mady by Lukas Machegger
+                Made by Lukas Machegger
             </Typography>
 
         </div>
