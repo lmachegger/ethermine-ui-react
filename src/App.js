@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { defaultData } from './utils/default-data';
 import { ThemeProvider, CssBaseline } from "@material-ui/core";
 import theme from './Theme';
+import Footer from './components/Footer';
 
 const App = () => {
   const [stats, setStats] = useState(defaultData);
@@ -23,6 +24,7 @@ const App = () => {
       <div className="App">
         <Header />
         <StatContent data={stats} />
+        <Footer />
       </div>
     </ThemeProvider>
   );
