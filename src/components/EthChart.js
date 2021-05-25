@@ -5,12 +5,12 @@ import {
     ValueAxis,
     Chart,
     LineSeries,
-    Title,
+    // Title,
     Legend
 } from '@devexpress/dx-react-chart-material-ui';
 import {
     ValueScale,
-    Animation,
+    // Animation,
 } from '@devexpress/dx-react-chart';
 import { makeStyles } from '@material-ui/core';
 import { withStyles } from "@material-ui/core/styles";

@@ -13,7 +13,7 @@ const Header = () => {
     return (
         <div id="header">
             <Typography className={classes.header} variant="h4" gutterBottom>
-                Ethermine Stats
+                Ethermine Stats V2
             </Typography>
 
         </div>

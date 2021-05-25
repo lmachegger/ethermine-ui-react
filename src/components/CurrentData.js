@@ -9,10 +9,10 @@ const useStyles = makeStyles((theme) => ({
         height: "100%",
         borderRadius: "12px"
     },
-    balanceText: {
+    dataText: {
         paddingBottom: theme.spacing(1)
     },
-    balanceHeader: {
+    dataHeader: {
         padding: theme.spacing(1)
     },
     textContainer: {
@@ -39,45 +39,45 @@ function CurrentData({ stats }) {
 
     return (
         <Paper className={classes.paperContainer} elevation={6}>
-            <Typography className={classes.balanceHeader} variant="h5" gutterBottom>
+            <Typography className={classes.dataHeader} variant="h5" gutterBottom>
                 Current Data
             </Typography>
             <Grid container justify="center">
                 <Grid container className={classes.textContainer} justify="space-between">
-                    <Typography className={classes.balanceText} variant="body1" align="left">
+                    <Typography className={classes.dataText} variant="body1" align="left">
                         Avg Hashrate (24h)
                     </Typography>
-                    <Typography className={classes.balanceText} variant="body1" align="right" color="textSecondary">
+                    <Typography className={classes.dataText} variant="body1" align="right" color="textSecondary">
                         {currentStat.averageHashrate.toFixed(4)} MH/s
                     </Typography>
                 </Grid>
             </Grid>
             <Grid container justify="center">
                 <Grid container className={classes.textContainer} justify="space-between">
-                    <Typography className={classes.balanceText} variant="body1" align="left">
+                    <Typography className={classes.dataText} variant="body1" align="left">
                         Current Hashrate
                     </Typography>
-                    <Typography className={classes.balanceText} variant="body1" align="right" color="textSecondary">
+                    <Typography className={classes.dataText} variant="body1" align="right" color="textSecondary">
                         {currentStat.currentHashrate.toFixed(4)} MH/s
                     </Typography>
                 </Grid>
             </Grid>
             <Grid container justify="center">
                 <Grid container className={classes.textContainer} justify="space-between">
-                    <Typography className={classes.balanceText} variant="body1" align="left">
+                    <Typography className={classes.dataText} variant="body1" align="left">
                         ETH per hour
                     </Typography>
-                    <Typography className={classes.balanceText} variant="body1" align="right" color="textSecondary">
+                    <Typography className={classes.dataText} variant="body1" align="right" color="textSecondary">
                         {currentStat.coinsPerHour.toFixed(6)} ETH/h
                     </Typography>
                 </Grid>
             </Grid>
             <Grid container justify="center">
                 <Grid container className={classes.textContainer} justify="space-between">
-                    <Typography className={classes.balanceText} variant="body1" align="left">
+                    <Typography className={classes.dataText} variant="body1" align="left">
                         USD per hour
                     </Typography>
-                    <Typography className={classes.balanceText} variant="body1" align="right" color="textSecondary">
+                    <Typography className={classes.dataText} variant="body1" align="right" color="textSecondary">
                         {currentStat.usdPerHour.toFixed(6)} USD/h
                     </Typography>
                 </Grid>
