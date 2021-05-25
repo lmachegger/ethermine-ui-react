@@ -1,0 +1,18 @@
+display data in 2 tables:
+
+
+                    AVERAGES
+Name                | Daily | Weekly | Monthly | All
+reported Hashrate   | 12    | 13     | 13      | 14
+received Hashrate   | 13    | 13     | 14      | 14
+USD/h               | 13    | 13     | 14      | 14
+
+
+                    MAXIMUMS
+Name                | Daily | Weekly | Monthly | All
+reported Hashrate   | 12    | 13     | 13      | 14
+received Hashrate   | 13    | 13     | 14      | 14
+USD/h               | 13    | 13     | 14      | 14
+
+
+TAKE INSPIRATION FROM: https://material-kit-pro-react.devias.io/dashboard

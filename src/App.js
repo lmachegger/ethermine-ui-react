@@ -1,25 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useEffect} from 'react';
+import Header from './components/Header';
+import StatContent from './components/StatContent';
+import { fetchData } from './utils/fetch-data';
+import { useState } from 'react';
+import {defaultData} from './utils/default-data';
+import { ThemeProvider, CssBaseline, Typography } from "@material-ui/core";
+import theme from './Theme';
 
-function App() {
+const App = () => {
+  const [stats, setStats] = useState(defaultData);
+  
+  useEffect(() => {
+    fetchData((data) => {
+      setStats(data);
+    })
+  }, [])
+
   return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <StatContent data={stats} />
     </div>
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
