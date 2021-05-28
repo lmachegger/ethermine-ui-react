@@ -34,10 +34,6 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const usdColor = "#42A5F5";
-const ethColor = "#FF7043";
-
-
 const options = {
     scales: {
         yAxes: [
@@ -65,6 +61,23 @@ const options = {
         },
         line: {
             borderWidth: 2
+        }
+    },
+    plugins: {
+        tooltip: {
+            callbacks: {
+                label: function (context) {
+                    var label = context.dataset.label || '';
+
+                    if (label) {
+                        label += ': ';
+                    }
+                    if (context.parsed.y !== null) {
+                        label += context.parsed.y.toFixed(6);
+                    }
+                    return label;
+                }
+            }
         }
     }
 };

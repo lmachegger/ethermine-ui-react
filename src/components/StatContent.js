@@ -1,7 +1,6 @@
 import Grid from '@material-ui/core/Grid';
 import Balance from './Balance';
 import CurrentData from './CurrentData';
-import EthChart from './EthChart';
 import EthChartV2 from './EthChartV2';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -39,9 +38,6 @@ const StatContent = ({ data }) => {
                     <CurrentData stats={data['Daily'].stats} />
                 </Grid>
 
-                {/* <Grid item className={classes.contentItems} xs={12} >
-                    <EthChart data={data} />
-                </Grid > */}
                 <Grid item className={classes.contentItems} xs={12} >
                     <EthChartV2 data={data} />
                 </Grid >
